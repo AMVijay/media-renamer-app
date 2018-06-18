@@ -43,7 +43,7 @@
 				<configuration>
 					<mainClass>poc.vijay.mediaOrganizer.App</mainClass>
 					<arguments>
-						<argument>C:\Vijay\media</argument>
+						<argument>./media</argument>
 					</arguments>
 				</configuration>
 			</plugin>
