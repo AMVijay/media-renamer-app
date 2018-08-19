@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
@@ -29,7 +30,7 @@ public class App {
 
 				if (root.isDirectory()) {
 					File[] fileArray = root.listFiles();
-					if (fileArray != null && fileArray.length > 0) {
+					if (Objects.nonNull(fileArray) && fileArray.length > 0) {
 						int fileCount = 1;
 						List<String> notModifiedFiles = new ArrayList<String>();
 						for (File file : fileArray) {
