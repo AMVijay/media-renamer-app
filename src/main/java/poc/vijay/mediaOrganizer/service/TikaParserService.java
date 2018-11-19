@@ -1,9 +1,8 @@
-package poc.vijay.mediaOrganizer;
+package poc.vijay.mediaOrganizer.service;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.tika.exception.TikaException;
@@ -13,9 +12,9 @@ import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
-public class TikaParserService {
+import poc.vijay.mediaOrganizer.util.DateUtil;
 
-	private static final String DATE_FORMATTER = "yyyyMMdd_HHmmss";
+public class TikaParserService {
 
 	public static TikaParserService getInstance() {
 		TikaParserService object = new TikaParserService();
@@ -31,20 +30,12 @@ public class TikaParserService {
 		InputStream stream = new FileInputStream(filePath);
 		parser.parse(stream, handler, metadata);
 		stream.close();
+		
 		Date mediaCreationDate = metadata.getDate(TikaCoreProperties.CREATED);
 
-		String mediaCreationDateString = formatDate(mediaCreationDate);
+		String mediaCreationDateString = DateUtil.getInstance().formatDate(mediaCreationDate);
 
 		return mediaCreationDateString;
-	}
-
-	private String formatDate(Date creationDate) {
-		String creationDateString = null;
-		if (creationDate != null) {
-			SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_FORMATTER);
-			creationDateString = dateFormatter.format(creationDate);
-		}
-		return creationDateString;
 	}
 
 }

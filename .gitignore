@@ -1,4 +1,5 @@
 /target/
+/media/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###

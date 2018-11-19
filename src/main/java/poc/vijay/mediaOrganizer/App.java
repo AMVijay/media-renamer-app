@@ -9,6 +9,9 @@ import java.util.Objects;
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
+import poc.vijay.mediaOrganizer.service.FileAttributesService;
+import poc.vijay.mediaOrganizer.service.TikaParserService;
+
 /**
  * MediaNameFormatter - Class to rename the files as yyyyMMdd_HHmmss format by
  * when the picture/video taken.
@@ -94,8 +97,14 @@ public class App {
 	 */
 	private static String fetchCreationDate(String absolutePath) throws IOException, SAXException, TikaException {
 		String creationDate = null;
-		if (absolutePath != null) {
-			creationDate = TikaParserService.getInstance().fetchCreationDate(absolutePath);
+		if (absolutePath != null) {	
+			String extension = getExtension(absolutePath);
+			if(extension.equalsIgnoreCase(".mov")) {
+				creationDate = FileAttributesService.getInstance().fetchLastModifiedDate(absolutePath);
+			}
+			else {
+				creationDate = TikaParserService.getInstance().fetchCreationDate(absolutePath);
+			}
 			if (creationDate == null || creationDate.isEmpty()) {
 				creationDate = FileAttributesService.getInstance().fetchCreationDate(absolutePath);
 			}
