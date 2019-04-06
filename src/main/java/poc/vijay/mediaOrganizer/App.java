@@ -23,6 +23,10 @@ public class App {
 
 	private static final String PATH_SEPARATOR = "//";
 
+	/**
+	 * Main method for project
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		try {
