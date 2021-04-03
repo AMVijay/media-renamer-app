@@ -1,5 +1,5 @@
-# MediaNameFormatter
-Application to change the media files (Images, Video, Audio,..) name to the time taken format using Apache Tika, Spring Framework
+# media file rename application
+This application helps to rename the media file (Images, Video, Audio,..) name to the time taken format using Java language and Apache Tika framework.
 
 
 ## How to run the utility? 
