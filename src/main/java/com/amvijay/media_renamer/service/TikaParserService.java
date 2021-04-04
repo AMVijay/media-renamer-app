@@ -1,4 +1,4 @@
-package poc.vijay.mediaOrganizer.service;
+package com.amvijay.media_renamer.service;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,7 +12,8 @@ import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
-import poc.vijay.mediaOrganizer.util.DateUtil;
+import com.amvijay.media_renamer.util.DateUtil;
+
 
 public class TikaParserService {
 

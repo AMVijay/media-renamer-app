@@ -1,4 +1,4 @@
-package poc.vijay.mediaOrganizer.service;
+package com.amvijay.media_renamer.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import poc.vijay.mediaOrganizer.util.DateUtil;
+import com.amvijay.media_renamer.util.DateUtil;
 
 public class FileAttributesService {
 

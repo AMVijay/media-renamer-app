@@ -1,4 +1,4 @@
-package poc.vijay.mediaOrganizer.util;
+package com.amvijay.media_renamer.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

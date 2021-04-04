@@ -1,5 +1,5 @@
 /target/
-/media/
+/media*/
 /.vscode/
 /Usersamvij/
 !.mvn/wrapper/maven-wrapper.jar

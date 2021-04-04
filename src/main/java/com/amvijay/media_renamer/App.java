@@ -1,31 +1,37 @@
-package poc.vijay.mediaOrganizer;
+package com.amvijay.media_renamer;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
-import poc.vijay.mediaOrganizer.service.FileAttributesService;
-import poc.vijay.mediaOrganizer.service.TikaParserService;
+import com.amvijay.media_renamer.service.FileAttributesService;
+import com.amvijay.media_renamer.service.TikaParserService;
+import com.amvijay.media_renamer.util.DateUtil;
 
 /**
  * MediaNameFormatter - Class to rename the files as yyyyMMdd_HHmmss format by
  * when the picture/video taken.
  * 
- * @author Vijay
+ * @author Vijayaraaghavan Manoharan
  *
  */
 public class App {
 
 	private static final String PATH_SEPARATOR = "//";
+	
+	private static final String HYPEN = "-";
+	
 
 	/**
 	 * Main method for project
-	 * @param args
+	 * @param args as String array.
 	 */
 	public static void main(String[] args) {
 
@@ -33,11 +39,15 @@ public class App {
 
 			if (args.length > 0 && args[0] != null) {
 
-				File root = new File(args[0]);
+				File sourceRoot = new File(args[0]);
 
-				if (root.isDirectory()) {
-					File[] fileArray = root.listFiles();
-					if (Objects.nonNull(fileArray) && fileArray.length > 0) {
+				if (sourceRoot.isDirectory()) {
+					
+					File destinationRoot = new File(sourceRoot.getAbsolutePath() + HYPEN + DateUtil.getInstance().formatDate(Calendar.getInstance().getTime()));
+					destinationRoot.mkdir();
+					
+					File[] fileArray = sourceRoot.listFiles();
+					if(fileArray != null && fileArray.length > 0) {
 						int fileCount = 1;
 						List<String> notModifiedFiles = new ArrayList<String>();
 						for (File file : fileArray) {
@@ -47,18 +57,16 @@ public class App {
 
 								if (creationDate != null && !creationDate.isEmpty()) {
 									String extension = getExtension(file.getName());
-									File newFile = new File(root + PATH_SEPARATOR + creationDate + extension);
+									File newFile = new File(destinationRoot + PATH_SEPARATOR + creationDate + extension);
 									if (newFile.exists()) {
 										Integer count = Integer.valueOf(0);
-										newFile = fetchNextUniqueFileObject(root.getPath(), creationDate, extension,
+										newFile = fetchNextUniqueFileObject(destinationRoot.getPath(), creationDate, extension,
 												count);
 									}
 									System.out.println(fileCount + ". Old File Name :: " + file.getName()
 											+ " ;New File Name :: " + newFile.getName());
-									boolean success = file.renameTo(newFile);
-									if (!success) {
-										notModifiedFiles.add(file.getName());
-									}
+									// Copy file to new location with new file name
+									Files.copy(file.toPath(), newFile.toPath(), StandardCopyOption.COPY_ATTRIBUTES);
 
 								}
 							}
