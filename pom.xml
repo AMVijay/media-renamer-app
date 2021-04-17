@@ -39,12 +39,24 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<mainClass>com.amvijay.media_renamer.App</mainClass>
-					<arguments>
-						<argument>./media</argument>
-					</arguments>
-				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.4.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<!-- <classifier>spring-boot</classifier> -->
+							<mainClass>
+								com.amvijay.media_renamer.App
+							</mainClass>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
